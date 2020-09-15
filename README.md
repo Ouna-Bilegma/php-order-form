@@ -1,4 +1,4 @@
-<h1> Php sushi/rame order form :ramen: :sushi:</h1>
+<h1> Php sushi/ramen order form :ramen: :sushi:</h1>
 
     Repository: php-order-form
     Type of Challenge: Learning challenge

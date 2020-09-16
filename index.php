@@ -6,8 +6,8 @@ declare(strict_types=1);
 session_start();
 
 // define variables and set to empty values
-$emailErr = $streetErr = $streetnumberErr = $cityErr = $zipcodeErr = $productsErr = "";
-$email = $street = $streetnumber = $city = $zipcode = $products = "";
+$emailErr = $streetErr = $streetNumberErr = $cityErr = $zipcodeErr = $productsErr = "";
+$email = $street = $streetNumber = $city = $zipcode = $products = "";
 $isFormValid;
 $submit = "";
 $deliveryTime = "";
@@ -39,14 +39,14 @@ if (!empty($_POST)) {
   }
 
   //street number
-  if (empty($_POST["streetnumber"])) {
-    $streetnumberErr = "street number is required";
+  if (empty($_POST["streetNumber"])) {
+    $streetNumberErr = "street number is required";
     $isFormValid = false;
   } else {
-    $streetnumber = test_input($_POST["streetnumber"]);
-    // check if the streetnumber only consists out of numbers
+    $streetNumber = test_input($_POST["streetNumber"]);
+    // check if the streetNumber only consists out of numbers
     if (!preg_match("/^[0-9]*$/", $streetnumber)) {
-      $streetnumberErr = "Only numbers are allowed";
+      $streetNumberErr = "Only numbers are allowed";
       $isFormValid = false;
     }
   }
@@ -174,7 +174,7 @@ if (isset($_COOKIE['amountOverall'])) {
 $cookie = "$totalAmount";
 setcookie("amountOverall", $cookie, time() + (86400 * 30), "/"); // 86400 = 1 day
 
-//Function to validate the input
+//Function to validate the input,we can check each $_POST variable with the test_input() function
 
 function test_input($data)
 {
@@ -204,16 +204,15 @@ function whatIsHappening()
   var_dump($_SESSION);
 }
 
-//-----------------------------------------------------------------------------
 // NAME: sendEmail
 // FUNCTION: send the email, using the input that the user typed
-//-----------------------------------------------------------------------------
+
 function sendEmail($email)
 {
 
 
   $headers .= "From: Oyuna Tsybdenova" . "\r\n";
-  $message = "Dear Customer: \n\n Thank you for your order!.\n\n\nSincerely : sushi studio";
+  $message = "Dear Customer: \n\n Thank you for your order!.\n\n\n<Yours : sushi studio";
   $subject = "Order Received";
   mail($email, $subject, $message, $headers);
 }
